@@ -1,15 +1,15 @@
 # Working with files
-
 ### Exception handling
 ### File permissions
 
-#### Example of some errors/exceptions
+#### Example of some errors/exceptions in traceback
 - `value error`
 - `syntax error`
 - `outof bounds`
 - `key error `
 - `attribute error`
 - `zeroDivison error`
+- `etc`
 
 
 #### File permissions
@@ -22,22 +22,23 @@
 - `b` This is for binary mode
 - `+` this will open a file for reading and writing (updating)
 
+- -------------------------------------
 
-**We have `try` `except` and `finally`**
+### We have `try` `except` and `finally`**
 - `try` works as `if` condition
 - `exept` works as `elif`
-- `finally` works as `else`. `Finally` will execute regardless of `try` and `except` conditions
+- `finally` works as `else`. **`Finally` will execute regardless of `try` and `except` conditions**
 
 - Playing around with different errors
 ```
-print (0/0) # ZeroDivisionError: division by zero
+print (1/0) # ZeroDivisionError: division by zero
 
 num = 9 # SyntaxError: invalid syntax
 if num > 8
    print(num)
 ```
 
-### Create a file with required permission and see what errors/ assumptoipns are possible to be seen
+### Create a file with required permission and see what errors/ assumptions are possible to be seen
 
 ```
  file = open("order.text") # open() takes a string arg with file name
@@ -47,39 +48,54 @@ if num > 8
 
 - Second iteration
 ```
- try:
-     file = open("order.text")
-     print("File found") # Try block required exept or will throw an error
- except FileNotFoundError as errmsg: # errmsg is an Alias ( same as a nick name)
-     print(f"Panic, File not found{errmsg}")
-     # RAISE:  this would print original error message
- finally: # Will run regardless of try and axcept block
-     print("Thank you, see you again")
-
+try:
+#     file = open("order.text")
+#     print("File found (try, runs if file exists)") # Try block required except or will throw a file not found error
+# except FileNotFoundError as errmsg: # errmsg is an Alias (same as a nick name)
+#     print(f"Panic, File not found{errmsg} (except, runs if file doesn't exist)")
+#     # RAISE:  this would print original error message
+# finally: # Will run regardless of try and except block
+#     print("Thank you, see you again ( runs regardless) ")
 ```
 
 
-### **Crating a file named order.text. The name must be the same**
+### **Creating a file named order.text. The name must be the same as in the code**
 
 
 - Let's apply DRY - OOP - Python package
 - if you have completed reading task, please move onto writing/adding items to order.text
+
+### TASK
+- 1) Create a class with methods
+- 2) Create a package, and import class with inheritance 
+   
+- Created a package and put the exception handling class in the app directory, in a file called `exception_handlong.py`
+```
+class ExceptionHandling:
+
+    def __init__(self,file_name):
+        self.file_name = file_name
+        try:
+            open(f"{self.file_name}.text")
+            print("File found")
+        except FileNotFoundError as errmsg:
+            print(f"Panic, File not found{errmsg}")
+        finally:
+            print("Thank you, see you again")
 ```
 
- def finding_file(file):
+- Created a file called `__init__.py` in app directory
+- Created a file ( same directory as app) called `program.py`
 
-     try:
-         file_name = open(f"{file}.text")
-         print("File found")
-     except FileNotFoundError as errmsg:
-         print(f"Panic, File not found{errmsg}")
-     finally:
-         print("Thank you, see you again")
 
- file = input("What is the name of the file you would like to read?: ").strip()
- print(finding_file(file))
+```
+from app.exception_handling import ExceptionHandling
+
+ExceptionHandling(input("What is the name of the file you would like to read?: ").strip())
 ```
 - ------------------------------------------------------------------------- 
+
+
 - Open file and read it
 - Incomplete task
 ```
